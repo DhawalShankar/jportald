@@ -4,3 +4,5 @@ node_modules
 .netlify
 .cph
 .vercel
+.env
+.env.local
