@@ -111,7 +111,7 @@ const handleElectiveXchangeClick = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <header className="py-6 px-4 border-b border-white/10">
         <div className="container mx-auto flex items-center justify-center">
-          <h1 className="text-3xl font-bold tracking-tighter">Modern JIIT WebKiosk</h1>
+          <h1 className="text-3xl font-bold tracking-tighter">Student-Community JIIT WebPortal</h1>
         </div>
       </header>
 
@@ -206,7 +206,7 @@ const handleElectiveXchangeClick = () => {
                   onClick={handleElectiveXchangeClick}
                   className="flex items-center justify-center px-6 py-2 bg-purple-600/20 border border-purple-500/30 text-purple-400 hover:bg-purple-600/30 hover:text-purple-300 transition-colors rounded-lg text-sm font-medium gap-2"
                 >
-                  <ArrowUpDown size={18} /> Elective Xchange
+                  <ArrowUpDown size={18} /> ElectiveXChange
                 </button>
               </div>
             </div>
@@ -219,7 +219,7 @@ const handleElectiveXchangeClick = () => {
           Created with <Heart className="w-4 h-4 text-red-400" /> for JIIT students only
         </p>
         <p className="text-sm mt-2 flex items-center justify-center gap-1">
-          Not liable for attendance-related emotional damage <Laugh className="w-4 h-4" />
+          Attendance is a myth! <Laugh className="w-4 h-4" />
         </p>
       </footer>
     </div>
