@@ -25,11 +25,6 @@ const TABS = [
   { key: 'auto', label: 'Auto' },
 ];
 
-const MESS_MENU_VIEWS = [
-  { key: 'daily', label: 'Daily View' },
-  { key: 'weekly', label: 'Weekly View' },
-];
-
 export default function SettingsDialog({ onLogout, attendanceGoal, setAttendanceGoal }) {
   const { themeMode, darkTheme, lightTheme } = useTheme();
   const [open, setOpen] = useState(false);
@@ -40,16 +35,11 @@ export default function SettingsDialog({ onLogout, attendanceGoal, setAttendance
   const [swipeEnabled, setSwipeEnabled] = useState(() => {
     return localStorage.getItem('swipeEnabled') !== 'false';
   });
-  const [defaultMessMenuView, setDefaultMessMenuView] = useState(() => {
-    return localStorage.getItem('defaultMessMenuView') || 'daily';
-  });
 
   useEffect(() => {
     const currentTheme = themeMode || localStorage.getItem('theme') || 'light';
     setSelectedTheme(currentTheme);
   }, [themeMode]);
-
-
 
   function applyTheme(theme) {
     if (theme === 'dark') {
@@ -83,11 +73,6 @@ export default function SettingsDialog({ onLogout, attendanceGoal, setAttendance
   function handleSwipeEnabledChange(value) {
     setSwipeEnabled(value);
     localStorage.setItem('swipeEnabled', value.toString());
-  }
-
-  function handleMessMenuViewChange(value) {
-    setDefaultMessMenuView(value);
-    localStorage.setItem('defaultMessMenuView', value);
   }
 
   function handleTargetAttendanceChange(e) {
@@ -175,26 +160,6 @@ export default function SettingsDialog({ onLogout, attendanceGoal, setAttendance
               checked={swipeEnabled}
               onCheckedChange={handleSwipeEnabledChange}
             />
-          </div>
-
-          <div className="grid grid-cols-2 gap-6 items-center py-2">
-            <Label className="text-sm font-medium text-white dark:text-black">Default mess menu view</Label>
-            <Select value={defaultMessMenuView} onValueChange={handleMessMenuViewChange}>
-              <SelectTrigger className="w-full bg-black dark:bg-white text-white dark:text-black border-2 border-white dark:border-black">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-black dark:bg-white border-2 border-white dark:border-black">
-                {MESS_MENU_VIEWS.map((view) => (
-                  <SelectItem 
-                    key={view.key} 
-                    value={view.key}
-                    className="text-white dark:text-black hover:bg-black hover:text-white dark:hover:bg-black dark:hover:text-white focus:bg-black focus:text-white dark:focus:bg-black dark:focus:text-white"
-                  >
-                    {view.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
           </div>
 
           <div className="grid grid-cols-2 gap-6 items-center py-2">

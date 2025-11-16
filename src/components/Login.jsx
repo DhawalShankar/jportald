@@ -6,9 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { LoginError } from "https://cdn.jsdelivr.net/npm/jsjiit@0.0.20/dist/jsjiit.esm.js"
-import { Lock, User, UtensilsCrossed, Calendar, Heart, Laugh } from "lucide-react"
-import MessMenu from "./MessMenu"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Lock, User, ArrowUpDown, Heart, Laugh } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 const formSchema = z.object({
   enrollmentNumber: z.string({
@@ -20,12 +19,12 @@ const formSchema = z.object({
 })
 
 export default function Login({ onLoginSuccess, w }) {
+  const navigate = useNavigate()
   const [loginStatus, setLoginStatus] = useState({
     isLoading: false,
     error: null,
     credentials: null,
   })
-  const [isFeatureOpen, setIsFeatureOpen] = useState(false)
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [showInstall, setShowInstall] = useState(false)
 
@@ -94,6 +93,11 @@ export default function Login({ onLoginSuccess, w }) {
     }
     setDeferredPrompt(null)
   }
+
+const handleElectiveXchangeClick = () => {
+  window.open("https://electivexchange.vercel.app/", "_blank");
+}
+
 
   function onSubmit(values) {
     setLoginStatus((prev) => ({
@@ -198,11 +202,12 @@ export default function Login({ onLoginSuccess, w }) {
                 </div>
               </div>
               <div className="flex justify-center gap-2">
-                <MessMenu>
-                  <button className="flex items-center justify-center px-6 py-2 bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 hover:text-green-300 transition-colors rounded-lg text-sm font-medium gap-2">
-                    <UtensilsCrossed size={18} /> Mess Menu
-                  </button>
-                </MessMenu>
+                <button 
+                  onClick={handleElectiveXchangeClick}
+                  className="flex items-center justify-center px-6 py-2 bg-purple-600/20 border border-purple-500/30 text-purple-400 hover:bg-purple-600/30 hover:text-purple-300 transition-colors rounded-lg text-sm font-medium gap-2"
+                >
+                  <ArrowUpDown size={18} /> Elective Xchange
+                </button>
               </div>
             </div>
           </div>
@@ -220,4 +225,3 @@ export default function Login({ onLoginSuccess, w }) {
     </div>
   )
 }
-

@@ -25,10 +25,8 @@ import ElectiveXchange from "./components/ElectiveXchange";
 import "./App.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { Analytics } from "@vercel/analytics/react";
-import { Loader2 } from "lucide-react";
-import MessMenu from "./components/MessMenu";
+import { Loader2, ArrowUpDown } from "lucide-react";
 import InstallPWA from "./components/InstallPWA";
-import { UtensilsCrossed } from "lucide-react";
 
 import {
   WebPortal,
@@ -37,7 +35,7 @@ import {
 
 const w = new WebPortal();
 
-function AuthenticatedApp({ w, setIsAuthenticated, messMenuOpen, onMessMenuChange }) {
+function AuthenticatedApp({ w, setIsAuthenticated }) {
   const navigate = useNavigate();
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -146,7 +144,6 @@ function AuthenticatedApp({ w, setIsAuthenticated, messMenuOpen, onMessMenuChang
     const distanceX = Math.abs(touchStart - touchEnd);
     const distanceY = Math.abs(touchStartY - touchEndY);
     
-    // Ignore if vertical movement is greater than horizontal (diagonal or vertical swipe)
     if (distanceY > distanceX) {
       setTouchStart(null);
       setTouchEnd(null);
@@ -181,7 +178,7 @@ function AuthenticatedApp({ w, setIsAuthenticated, messMenuOpen, onMessMenuChang
 
   return (
     <div className="relative">
-      <Navbar messMenuOpen={messMenuOpen} onMessMenuChange={onMessMenuChange} />
+      <Navbar />
       <div 
         className="h-screen flex flex-col"
         onTouchStart={onTouchStart}
@@ -191,9 +188,7 @@ function AuthenticatedApp({ w, setIsAuthenticated, messMenuOpen, onMessMenuChang
         <Analytics />
         <div className="flex-none z-30 bg-[black] -mt-[2px] md:ml-64">
           <Header 
-            setIsAuthenticated={setIsAuthenticated} 
-            messMenuOpen={messMenuOpen}
-            onMessMenuChange={onMessMenuChange}
+            setIsAuthenticated={setIsAuthenticated}
             attendanceGoal={attendanceGoal}
             setAttendanceGoal={setAttendanceGoal}
           />
@@ -465,49 +460,6 @@ function App() {
   const [themeMode, setThemeMode] = useState(() => {
     return localStorage.getItem('defaultTheme') || 'light';
   });
-  const [messMenuOpen, setMessMenuOpen] = useState(() => {
-    return localStorage.getItem("messMenuOpen") === "true";
-  });
-
-  const handleMessMenuChange = (open) => {
-    setMessMenuOpen(open);
-    localStorage.setItem("messMenuOpen", open.toString());
-  };
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.removeItem("messMenuOpen");
-    };
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        setMessMenuOpen(false);
-        localStorage.removeItem("messMenuOpen");
-      }
-    };
-
-    const handleBlur = () => {
-      setMessMenuOpen(false);
-      localStorage.removeItem("messMenuOpen");
-    };
-
-    const handleFocus = () => {
-      setMessMenuOpen(false);
-      localStorage.removeItem("messMenuOpen");
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('blur', handleBlur);
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('focus', handleFocus);
-    };
-  }, []);
 
   const darkTheme = () => {
     setThemeMode("dark");
@@ -573,11 +525,12 @@ function App() {
           <div className="bg-white/10 rounded-xl p-4 shadow-lg flex flex-col items-center gap-3 mb-4">
             <span className="text-xs text-white/60 mb-1">Quick Access</span>
             <div className="flex gap-2">
-              <MessMenu open={messMenuOpen} onOpenChange={handleMessMenuChange}>
-                <span className="flex items-center justify-center px-6 py-2 bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 hover:text-green-300 transition-colors rounded-lg text-sm font-medium gap-2 cursor-pointer">
-                  <UtensilsCrossed size={18} /> Mess Menu
-                </span>
-              </MessMenu>
+              <button 
+                onClick={() => window.location.hash = '#/electivexchange'}
+                className="flex items-center justify-center px-6 py-2 bg-purple-600/20 border border-purple-500/30 text-purple-400 hover:bg-purple-600/30 hover:text-purple-300 transition-colors rounded-lg text-sm font-medium gap-2 cursor-pointer"
+              >
+                <ArrowUpDown size={18} /> Elective Xchange
+              </button>
               <InstallPWA />
             </div>
           </div>
@@ -613,9 +566,7 @@ function App() {
           ) : (
             <AuthenticatedApp 
               w={w} 
-              setIsAuthenticated={setIsAuthenticated} 
-              messMenuOpen={messMenuOpen}
-              onMessMenuChange={handleMessMenuChange}
+              setIsAuthenticated={setIsAuthenticated}
             />
           )}
         </div>

@@ -2,11 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ThemeBtn from "./ui/ThemeBtn";
-import MessMenu from './MessMenu';
-import { Utensils } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import SettingsDialog from './SettingsDialog';
 
-const Header = ({ setIsAuthenticated, messMenuOpen, onMessMenuChange, attendanceGoal, setAttendanceGoal }) => {
+const Header = ({ setIsAuthenticated, attendanceGoal, setAttendanceGoal }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,6 +14,10 @@ const Header = ({ setIsAuthenticated, messMenuOpen, onMessMenuChange, attendance
     localStorage.removeItem('attendanceData');
     setIsAuthenticated(false);
     navigate('/login');
+  };
+
+  const handleElectiveXchangeClick = () => {
+    navigate('/electivexchange');
   };
 
   return (
@@ -39,13 +42,13 @@ const Header = ({ setIsAuthenticated, messMenuOpen, onMessMenuChange, attendance
           transition={{ delay: 0.2, duration: 0.5 }}
           className="flex items-center space-x-4"
         >
-          <MessMenu open={messMenuOpen} onOpenChange={onMessMenuChange}>
-            <div
-              className="p-2 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300 ease-in-out dark:text-gray-700 dark:hover:bg-gray-200 text-gray-300 hover:bg-[#0A0A0C] cursor-pointer"
-            >
-              <Utensils className="w-5 h-5" />
-            </div>
-          </MessMenu>
+          <div
+            onClick={handleElectiveXchangeClick}
+            className="p-2 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300 ease-in-out dark:text-gray-700 dark:hover:bg-gray-200 text-gray-300 hover:bg-[#0A0A0C] cursor-pointer"
+            title="Elective Xchange"
+          >
+            <ArrowUpDown className="w-5 h-5" />
+          </div>
           <ThemeBtn />
           <SettingsDialog onLogout={handleLogout} attendanceGoal={attendanceGoal} setAttendanceGoal={setAttendanceGoal} />
         </motion.div>

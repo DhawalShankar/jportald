@@ -19,7 +19,6 @@ const desktopNavItems = [
   { name: "Subjects", path: "/subjects", icon: Book },
   { name: "Fee", path: "/fee", icon: FileText },
   { name: "Academic Calendar", path: "/academic-calendar", icon: Calendar },
-  { name: "Elective Swap", path: "/electivexchange", icon: ArrowUpDown },
   { name: "Profile", path: "/profile", icon: User },
 ]
 
@@ -129,4 +128,3 @@ export default function Navbar() {
     </>
   )
 }
-
