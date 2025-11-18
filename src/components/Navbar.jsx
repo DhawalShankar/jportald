@@ -9,6 +9,7 @@ const navItems = [
   { name: "Grades", path: "/grades", icon: ChartSpline },
   { name: "Exams", path: "/exams", icon: FileText },
   { name: "Subjects", path: "/subjects", icon: Book },
+  { name: "Elective Swap", path: "/electivexchange", icon: ArrowUpDown },
   { name: "Profile", path: "/profile", icon: User },
 ]
 
@@ -19,6 +20,7 @@ const desktopNavItems = [
   { name: "Subjects", path: "/subjects", icon: Book },
   { name: "Fee", path: "/fee", icon: FileText },
   { name: "Academic Calendar", path: "/academic-calendar", icon: Calendar },
+  { name: "Elective Swap", path: "/electivexchange", icon: ArrowUpDown },
   { name: "Profile", path: "/profile", icon: User },
 ]
 
