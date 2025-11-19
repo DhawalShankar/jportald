@@ -460,6 +460,9 @@ function App() {
   const [themeMode, setThemeMode] = useState(() => {
     return localStorage.getItem('defaultTheme') || 'light';
   });
+  const handleElectiveXchangeClick = () => {
+  window.open("https://electivexchange.vercel.app/", "_blank");
+}
 
   const darkTheme = () => {
     setThemeMode("dark");
@@ -526,7 +529,7 @@ function App() {
             <span className="text-xs text-white/60 mb-1">Quick Access</span>
             <div className="flex gap-2">
               <button 
-                onClick={() => window.location.hash = '#/electivexchange'}
+                onClick={handleElectiveXchangeClick}
                 className="flex items-center justify-center px-6 py-2 bg-purple-600/20 border border-purple-500/30 text-purple-400 hover:bg-purple-600/30 hover:text-purple-300 transition-colors rounded-lg text-sm font-medium gap-2 cursor-pointer"
               >
                 <ArrowUpDown size={18} /> Elective Xchange
